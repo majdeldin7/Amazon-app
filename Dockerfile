@@ -1,20 +1,20 @@
 # --------------> The build image__
-FROM node:16
+#FROM node:16
 
 # Set the working directory inside the container
-WORKDIR /app
+#WORKDIR /app
 
 # Copy package.json and package-lock.json (or yarn.lock) to the container
-COPY package*.json ./
+#COPY package*.json ./
 
 # Install project dependencies
-RUN npm install
+#RUN npm install
 
 # Copy the rest of the application code to the container
-COPY . .
+#COPY . .
 
 # Build the app 
-RUN npm run build
+#RUN npm run build
 
 # --------------> The production image__
 FROM nginx:alpine
