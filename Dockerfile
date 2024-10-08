@@ -1,5 +1,5 @@
 # --------------> The build image__
-FROM node:16 AS build
+FROM node:lts-slim AS build
 
 # Set the working directory inside the container
 WORKDIR /app
