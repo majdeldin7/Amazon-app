@@ -1,4 +1,4 @@
-# Use the official Node.js 16 image as the base image
+# --------------> The build image__
 FROM node:16
 
 # Set the working directory inside the container
@@ -13,11 +13,23 @@ RUN npm install
 # Copy the rest of the application code to the container
 COPY . .
 
-# Build the React app
+# Build the app 
 RUN npm run build
 
-# Expose the port that the app will run on (usually 3000 by default)
-EXPOSE 3000
+# --------------> The production image__
+FROM nginx:alpine
 
-# Start the React app when the container starts
-CMD [ "npm", "start" ]
+# Set the working directory inside the container
+WORKDIR /usr/share/nginx/html
+
+# Remove all data from working directory :
+RUN rm -rf ./*
+
+# Copy dist (or build) directory :
+COPY --from=build /app/build .
+
+# Expose the port that the app will run on (usually 80 by default)
+EXPOSE 80
+
+# Set thr entrypoint :
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
