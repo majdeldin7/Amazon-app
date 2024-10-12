@@ -10,9 +10,9 @@ RUN npm install
 COPY . .
 # Build the app 
 RUN npm run build
-# test
+
 # --------------> The production image__
-FROM nginx:alpine
+FROM nginx:alpine-slim
 # Set the working directory inside the container
 WORKDIR /usr/share/nginx/html
 # Remove all data from working directory :
